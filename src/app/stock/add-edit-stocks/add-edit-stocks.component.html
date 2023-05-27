@@ -1,0 +1,34 @@
+<div class="modal-content styleform px-3 py-3" >
+  <p *ngIf="stock.id === 0">Add New Stock</p>
+  <p *ngIf="!(stock.id ===0)">Edit Stock</p>
+
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+
+
+  <div class="form-group">
+      <input [class.is-invalid]="name?.invalid && name?.touched"
+       [(ngModel)]="stock.name" type="text" required  class="form-control" formControlName="name"
+        placeholder="Stock Name">
+        <div *ngIf="name?.invalid && name?.touched || submitted">
+          <small class="text-danger"  *ngIf="name?.errors?.['required']">  Name is requried</small>
+      </div>
+  </div>
+  &nbsp;
+
+  &nbsp;
+  <div class="form-group">
+    <input [(ngModel)]="stock.price" required  [class.is-invalid]="price?.invalid && price?.touched"
+    formControlName="price"
+     type="text" class="form-control" placeholder="Stock Price">
+     <div *ngIf="price?.invalid && price?.touched || submitted">
+      <small class="text-danger"  *ngIf="price?.errors?.['required']">  Price is requried</small>
+  </div>
+  </div>
+  &nbsp;
+  <button class="btn btn-primary" type="submit" *ngIf="stock.id=== 0" > Add</button>
+  &nbsp; <button type="submit" class="btn btn-primary" *ngIf="!(stock.id=== 0)" > Edit</button>
+  &nbsp; <button class="btn btn-danger"  (click)="bsModel.hide()">Cancle</button>
+
+
+</form>
+</div>
