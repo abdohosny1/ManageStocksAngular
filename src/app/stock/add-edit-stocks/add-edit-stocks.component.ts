@@ -34,7 +34,6 @@ export class AddEditStocksComponent {
      if(this.stock.id==0){
       this.service.AddStock(this.stock).subscribe(
         taskAdd=>{
-          console.log("done add"+taskAdd);
           this.onClose(taskAdd);
           this.bsModel.hide();
         },
@@ -43,9 +42,6 @@ export class AddEditStocksComponent {
      }else{
       this.service.UpdateStock(this.stock.id,this.stock).subscribe(
         taskupdare=>{
-          console.log("id"+this.stock.id);
-
-          console.log(taskupdare);
           this.onClose(taskupdare);
           this.bsModel.hide();
         },
@@ -57,19 +53,15 @@ export class AddEditStocksComponent {
 
   registerForm = this.fb.group({
     name: ['',[Validators.required]],
-    price: ['',[Validators.required]],
 
   },);
 
   get name(){
     return this.registerForm.get('name');
   }
-  get price(){
-    return this.registerForm.get('price');
-  }
 
-  ngOnInit(): void {
-  }
+
+  
 
 
 
