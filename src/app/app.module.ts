@@ -12,16 +12,20 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { RouterModule } from '@angular/router';
 import { AddEditStocksComponent } from './stock/add-edit-stocks/add-edit-stocks.component';
 import { StockComponent } from './stock/stock.component';
+import { OrderModule } from './order/order.module';
+import { AddEditOrderComponent } from './order/add-edit-order/add-edit-order.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     NotFoundComponent,
     AddEditStocksComponent,
+    AddEditOrderComponent,
     StockComponent
   ],
   imports: [
     BrowserModule,
+    OrderModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

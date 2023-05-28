@@ -4,5 +4,13 @@ export interface IOrder{
   personName: string | null;
   quentity: number;
   stockId: number;
+  stockName:string;
+
+}
+
+export interface IOrderCreate{
+  personName: string | null;
+  quentity: number;
+  stockId: number;
 
 }

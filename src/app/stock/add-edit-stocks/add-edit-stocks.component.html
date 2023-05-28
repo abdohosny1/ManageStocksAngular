@@ -15,15 +15,7 @@
   </div>
   &nbsp;
 
-  &nbsp;
-  <div class="form-group">
-    <input [(ngModel)]="stock.price" required  [class.is-invalid]="price?.invalid && price?.touched"
-    formControlName="price"
-     type="text" class="form-control" placeholder="Stock Price">
-     <div *ngIf="price?.invalid && price?.touched || submitted">
-      <small class="text-danger"  *ngIf="price?.errors?.['required']">  Price is requried</small>
-  </div>
-  </div>
+
   &nbsp;
   <button class="btn btn-primary" type="submit" *ngIf="stock.id=== 0" > Add</button>
   &nbsp; <button type="submit" class="btn btn-primary" *ngIf="!(stock.id=== 0)" > Edit</button>

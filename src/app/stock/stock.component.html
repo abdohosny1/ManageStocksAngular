@@ -9,7 +9,7 @@
     <section class="col-12">
       <div class="d-flex justify-content-between my-2">
         <h3>
-        Department
+        Stocks
       </h3>
       <button (click)="AddStock()"  class="btn  btn-outline-success mx-2">Add Stock</button>
 
@@ -22,28 +22,23 @@
             <th >ID</th>
             <th >Name</th>
             <th>Price</th>
-            <th >CRUD</th>
+            <th >Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of stocks">
-          <tr>
+        <tbody >
+          <tr *ngFor="let item of stocks">
             <td>{{item.id}}</td>
-            <td>{{item.name}}<td>
-            <td>{{item.price}}<td>
-
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+   <td>
             <div>
 
-              <!-- <button (click)="onDetails(item)" class="btn  btn-secondary mx-2">View</button> -->
-              <!-- <button  class="btn  btn-outline-info mx-2" >Update</button> -->
+              <!-- <a class="btn  btn-outline-info mx-2" (click)="onEditStock(item)"  ><i class="bi bi-trash"></i>Update </a> -->
 
-              <!-- <a class="btn btn-outline-secondary" (click)="onDetails(item)"><i class="bi bi-eye"></i>Details </a>
-
-              <a class="btn  btn-outline-info mx-2" (click)="onEditEmployee(item)" ><i class="bi bi-trash"></i>Update </a>
-
-              <a class="btn btn-danger" (click)="onDeleteDepartment(item.id)"><i class="bi bi-trash"></i>Delete </a> -->
+              <a class="btn btn-danger"  (click)="onDeleteStock(item.id)"><i class="bi bi-trash"></i>Delete </a> 
 
             </div>
-
+          </td>
           </tr>
 
         </tbody>

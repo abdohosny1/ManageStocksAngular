@@ -6,6 +6,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {CommonModule} from '@angular/common'
+import { SignalrServiceService } from './signalr-service.service';
+import { Subscription } from 'rxjs';
+import { environment } from '../shared/environment';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -13,22 +17,33 @@ import {CommonModule} from '@angular/common'
 })
 export class StockComponent {
 
-  stocks:Array<IStock>=[];
+  stocks: IStock[] = []; // Replace with the actual type of your stocks
+
   bsModelresf? :BsModalRef;
+   stocksSubscription!: Subscription;
+   connection: signalR.HubConnection | undefined;
 
 
 
-  constructor(private stockService:StockService, private router:Router,private route: ActivatedRoute,
+  constructor(  private serviceSignalr:SignalrServiceService,private stockService:StockService,
     private bsmodalService: BsModalService,){}
 
   ngOnInit(): void {
-    this.GetAllStocks();
+    this.serviceSignalr.startConnection();
+
+    this.stocksSubscription = this.serviceSignalr.getStocks()
+      .subscribe((stocks: IStock[]) => {
+        console.log('Stocks received:', stocks);
+        // Do something with the stocks, such as assigning them to a component property
+        this.stocks = stocks;
+      });
+
+  
+     
   }
   GetAllStocks(){
     this.stockService.GetAllStock().subscribe(
        (response)=>{
-         console.log(response);
-         console.log("result");
          this.stocks=response
        },
        (error)=>{
@@ -40,13 +55,7 @@ export class StockComponent {
 
 
 
-  // onDetails(details:any){
-  //   this.router.navigate(["/Datails",details.id]);
 
-  // }
-  // onDelete(deleteEmp:number){
-  //   this.router.navigate(["/delete",deleteEmp]);
-  // }
 
   AddStock(){
     this.bsModelresf=this.bsmodalService.show(AddEditStocksComponent);
@@ -57,32 +66,38 @@ export class StockComponent {
     }
   }
 
-  // onEditEmployee(employee:any)
-  // {
+  ngOnDestroy(): void {
+    this.serviceSignalr.stopConnection();
+    if (this.stocksSubscription) {
+      this.stocksSubscription.unsubscribe();
+    }
+  }
+  onEditStock(stock:any)
+  {
 
-  //   this.bsModelresf=this.bsmodalService.show(AddEditEmployeeComponent,{initialState:{employee}});
-  //   this.bsModelresf.content.onClose=(update:any)=>{
-  //     if(update){
-  //       this.getEmployee();
-  //     }
-  //   }
-  // }
+    this.bsModelresf=this.bsmodalService.show(AddEditStocksComponent,{initialState:{stock}});
+    this.bsModelresf.content.onClose=(update:any)=>{
+      if(update){
+       // this.GetAllStocks();
+      }
+    }
+  }
 
-  // onDeleteEmployee(id:number){
+  onDeleteStock(id:number){
 
-  //   let confirmDelete=confirm("Are you sure  Delete?")
-  //   if(confirmDelete){
-  //      this.employeeService.RemoveEmployeeById(id).subscribe(
-  //        done=>{
-  //         this.getEmployee()
-  //         console.log("done");
+    let confirmDelete=confirm("Are you sure  Delete?")
+    if(confirmDelete){
+       this.stockService.RemoveStock(id).subscribe(
+         done=>{
+          this.GetAllStocks();
+          console.log("done");
 
-  //        },
-  //        error=>{console.log(error);}
-  //      )
+         },
+         error=>{console.log(error);}
+       )
 
 
-  //  }
+   }
 
-//}
+}
 }

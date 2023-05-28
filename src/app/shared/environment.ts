@@ -1,10 +1,11 @@
 export const environment = {
   "BASE_URL":"https://localhost:7101/api/",
   "ORDER":"Order",
-  "GetAllOrder":"GetAllOrder",
+  "GetAllOrder":"/GetAllOrder",
   "STOCK":"Stock",
   "updateprice":"updateprice",
   "GetAll":"/GetAll",
+  "STOCKHUB":"SocketHub",
 
 
   production: false

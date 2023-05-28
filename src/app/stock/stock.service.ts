@@ -22,7 +22,9 @@ export class StockService {
   }
 
   RemoveStock(id:number){
-    return this.http.delete(environment.BASE_URL+environment.STOCK+"/"+id);
+    //https://localhost:7101/api/Stock/id?id=28
+
+    return this.http.delete(environment.BASE_URL+environment.STOCK+"/id?id=" +id);
   }
 
   AddStock(emp:IStock){
@@ -30,6 +32,6 @@ export class StockService {
   }
 
   UpdateStock(id:number,stock:IStock){
-    return this.http.put(environment.BASE_URL+environment.STOCK+"/"+id,stock);
+    return this.http.put(environment.BASE_URL+environment.STOCK+"/id?id=" +id,stock);
   }
 }
