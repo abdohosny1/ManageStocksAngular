@@ -5,11 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
-import { StockModule } from './stock/stock.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { RouterModule } from '@angular/router';
 import { AddEditStocksComponent } from './stock/add-edit-stocks/add-edit-stocks.component';
 import { StockComponent } from './stock/stock.component';
 import { OrderModule } from './order/order.module';
@@ -31,12 +29,9 @@ import { AddEditOrderComponent } from './order/add-edit-order/add-edit-order.com
     HttpClientModule,
     ReactiveFormsModule,
      ModalModule,
-     //NgModule,
      FormsModule,
     ModalModule.forRoot(),
-    //StockModule,
-    //NgModule,
-    //RouterModule.forRoot([]),
+    
 
   ],
   providers: [],

@@ -29,7 +29,6 @@ export class SignalrServiceService {
       .then(() => {
         console.log('Connected to SignalR hub');
         this.connection.on('updateAllPrice', (newStocks: IStock[]) => {
-          console.log(newStocks);
           this.stocks = newStocks;
           this.stocksSubject.next(newStocks); // Emit the updated stocks through the subject
         });

@@ -16,7 +16,9 @@ export class OrderService {
 
    return this.http.get<IOrder[]>(environment.BASE_URL+environment.ORDER+environment.GetAllOrder);
   }
-
+  GetOrderByStock( name:string){
+    return this.http.get<IOrder[]>(environment.BASE_URL+environment.ORDER+"/name?name="+name);
+   }
   GetOrderById(id:number){
     return this.http.get(environment.BASE_URL+environment.ORDER+"/"+id);
   }

@@ -17,7 +17,7 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 })
 export class StockComponent {
 
-  stocks: IStock[] = []; // Replace with the actual type of your stocks
+  stocks: IStock[] = []; 
 
   bsModelresf? :BsModalRef;
    stocksSubscription!: Subscription;
@@ -72,16 +72,7 @@ export class StockComponent {
       this.stocksSubscription.unsubscribe();
     }
   }
-  onEditStock(stock:any)
-  {
 
-    this.bsModelresf=this.bsmodalService.show(AddEditStocksComponent,{initialState:{stock}});
-    this.bsModelresf.content.onClose=(update:any)=>{
-      if(update){
-       // this.GetAllStocks();
-      }
-    }
-  }
 
   onDeleteStock(id:number){
 

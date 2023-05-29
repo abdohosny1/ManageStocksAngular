@@ -3,6 +3,8 @@ import { OrderService } from './order.service';
 import { IOrder } from '../shared/model/order';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddEditOrderComponent } from './add-edit-order/add-edit-order.component';
+import { IStock } from '../shared/model/stock';
+import { StockService } from '../stock/stock.service';
 
 @Component({
   selector: 'app-order',
@@ -11,13 +13,43 @@ import { AddEditOrderComponent } from './add-edit-order/add-edit-order.component
 })
 export class OrderComponent {
   public orders: IOrder[] = []; // Replace with the actual type of your stocks
-
+  allStock:Array<IStock>=[];
+  nameStock:string="All";
+  
   bsModelresf? :BsModalRef;
-  constructor(private orderService:OrderService ,private bsmodalService: BsModalService){}
+  constructor(private orderService:OrderService ,private bsmodalService: BsModalService,private stockService:StockService){}
   ngOnInit(): void {
     this.GetAllOrder();
+    this.getAllStock();
+  }
+  getAllStock(){
+    this.stockService.GetAllStock().subscribe(
+      (response)=>{
+        this.allStock=[{id:0,name:"All"},...response];
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
   }
 
+  onStockSelected(name:string| null){
+    if(name ==="All"){
+     this.GetAllOrder();
+     this.nameStock="All"
+    }else{
+     this.orderService.GetOrderByStock(name!).subscribe(
+       (response)=>{
+         this.orders=response;
+         this.nameStock!=name
+ 
+       },
+       (error)=>{
+        console.log(error);
+       }
+    )
+    }
+   }
   GetAllOrder(){
     this.orderService.GetAllOrder().subscribe(
        (response)=>{

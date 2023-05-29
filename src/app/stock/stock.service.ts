@@ -12,8 +12,6 @@ export class StockService {
 
   GetAllStock(){
 
-    //return this.http.get<IStock[]>("https://localhost:7101/api/Stock/GetAll");
-
    return this.http.get<IStock[]>(environment.BASE_URL+environment.STOCK+environment.GetAll);
   }
 
@@ -22,8 +20,6 @@ export class StockService {
   }
 
   RemoveStock(id:number){
-    //https://localhost:7101/api/Stock/id?id=28
-
     return this.http.delete(environment.BASE_URL+environment.STOCK+"/id?id=" +id);
   }
 
